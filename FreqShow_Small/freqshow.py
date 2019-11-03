@@ -22,7 +22,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-# Enhancements over the original freqshow by Dan Stixrud, WQ7T
+# Enhancements over the original Freqshow by Dan Stixrud, WQ7T
 import os
 import time
 
@@ -66,6 +66,8 @@ INSTANT_LINE   = ( 150, 255, 255) # Bright yellow green.
 GRID_LINE      = (  119, 119, 130) # Light Grey
 GRID_BG        = (  10,  10,  30) # Dark Blue
 CENTER_LINE    = ( 125, 0,   0) # Red
+BLACK	       = (   0, 0,   0) # Black
+LINE_SHADOW      = (  96, 96, 96) # Medium Grey
 
 # Define gradient of colors for the waterfall graph.  Gradient goes from blue to
 # yellow to cyan to red.

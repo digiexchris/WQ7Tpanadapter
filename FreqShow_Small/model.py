@@ -22,7 +22,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-# Enhancements over the original freqshow by Dan Stixrud, WQ7T
+# Enhancements over the original Freqshow by Dan Stixrud, WQ7T
 import numpy as np
 from scipy import signal
 from scipy.fftpack import fft, rfft, fftshift
@@ -51,11 +51,11 @@ class FreqShowModel(object):
 		# Initialize RTL-SDR library.
 		self.sdr = RtlSdr()
 		self.set_swap_iq(True)   
-                self.set_sample_rate(.230)  # in MHz, must be within (.225001 <= sample_rate_mhz <= .300000) OR (.900001 <= sample_rate_mhz <= 3.200000)
-                self.set_zoom_fac(.02)   # equal to the frequency span you want to display on the screen in MHz
+		self.set_sample_rate(.230)  # in MHz, must be within (.225001 <= sample_rate_mhz <= .300000) OR (.900001 <= sample_rate_mhz <= 3.200000)
+		self.set_zoom_fac(.02)   # equal to the frequency span you want to display on the screen in MHz
 		self.set_lo_offset(0.02) # Local Oscillator offset in MHz, slide the DC spike out of the window by this amount.
 		self.set_center_freq(70.451500) # frequency in MHz of my 1st IF
- 		self.set_gain('AUTO')
+		# self.set_gain('AUTO')
 		self.set_fft_ave(3)
 		self.set_tune_rate(.001) # in MHz  
 		self.set_freq_correction(0)  # (58ppm for my unenhanced)can run test to determine this value, via regular antenna, not IF frequency! 
@@ -92,8 +92,7 @@ class FreqShowModel(object):
 
 	def set_freq_correction(self, freq_correction):
 		self.freq_correction = (freq_correction)
-		self.sdr.set_freq_correction(int(freq_correction + 1))
-
+		self.sdr.set_freq_correction(int(freq_correction+1))
 
         def get_lo_offset(self):
                 return (self.lo_offset)
@@ -112,7 +111,7 @@ class FreqShowModel(object):
 			freq_mhz = self.get_center_freq() + self.get_lo_offset()
 		else:
 			freq_mhz = self.get_center_freq()
-		self.sdr.set_center_freq(freq_mhz*(1000000.0))
+		self.sdr.set_center_freq(freq_mhz*1000000.0)
 		self._clear_intensity()
 
 	def get_lo_freq(self):

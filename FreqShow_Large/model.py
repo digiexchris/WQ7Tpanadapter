@@ -50,15 +50,15 @@ class FreqShowModel(object):
 
 		# Initialize RTL-SDR library.
 		self.sdr = RtlSdr()
-                self.set_freq_correction(0)  # (58ppm for unenhanced)can run test to determine this value, via regular antenna, not IF frequency!
 		self.set_swap_iq(True)   
-                self.set_sample_rate(.230)  # in MHz, must be within (.225001 <= sample_rate_mhz <= .300000) OR (.900001 <= sample_rate_mhz <= 3.200000)
-                self.set_zoom_fac(.05)   # equal to the frequency span you want to display on the screen in MHz
+		self.set_sample_rate(.230)  # in MHz, must be within (.225001 <= sample_rate_mhz <= .300000) OR (.900001 <= sample_rate_mhz <= 3.200000)
+		self.set_zoom_fac(.05)   # equal to the frequency span you want to display on the screen in MHz
 		self.set_lo_offset(0.03) # Local Oscillator offset in MHz, slide the DC spike out of the window by this amount.
 		self.set_center_freq(70.451500)
- 		self.set_gain('AUTO')
+		self.set_gain('AUTO')
 		self.set_fft_ave(3)
-		self.set_tune_rate(.001) # in MHz   
+		self.set_tune_rate(.001) # in MHz
+		self.set_freq_correction(0)  # (58ppm for my unenhanced)can run test to determine this value, via regular antenna, not IF frequency!
 		self.set_sig_strength(0.00)
 		self.set_kaiser_beta(8.6)
 		self.set_peak(True)   # Set true for peaks, set False for averaging. 	
@@ -108,10 +108,10 @@ class FreqShowModel(object):
 	def set_center_freq(self, value):
 		self.center_freq  = (value)
 		if ((self.get_sample_rate()/self.get_zoom_fac())/2)>((self.get_lo_offset()/self.get_zoom_fac())-(self.get_zoom_fac()/2)):
-			freq_hz = float((self.get_center_freq() + self.get_lo_offset())*1000000)
+			freq_mhz = self.get_center_freq() + self.get_lo_offset()
 		else:
-			freq_hz = float(self.get_center_freq()*1000000)
-		self.sdr.set_center_freq(float(freq_hz))
+			freq_mhz = self.get_center_freq()
+		self.sdr.set_center_freq(freq_mhz*1000000.0)
 		self._clear_intensity()
 
 	def get_lo_freq(self):

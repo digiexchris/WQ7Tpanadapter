@@ -24,7 +24,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-# Enhancements over the original freqshow by Dan Stixrud, WQ7T
+# Enhancements over the original Freqshow by Dan Stixrud, WQ7T
 from views import *
 
 
