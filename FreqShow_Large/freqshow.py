@@ -31,26 +31,33 @@ import pygame
 import controller
 import model
 import ui
-
+import yaml
 
 # Application configuration.
 
-#SDR_SAMPLE_SIZE = 512  # Number of samples per frequency bin to grab from the radio.  Should be
-#SDR_SAMPLE_SIZE = 1024	# larger than the maximum display width.
+with open("config.yml", 'r') as ymlfile:
+    cfg = yaml.load(ymlfile)
+
+for i in cfg:
+    print(i, cfg[i])
+
+#SDR_SAMPLE_SIZE = 512  # Number of samples per frequency bin to grab from the radio. See config.yml.example Should be
+#SDR_SAMPLE_SIZE = 1024	 # larger than the maximum display width.
 #SDR_SAMPLE_SIZE = 2048
 #SDR_SAMPLE_SIZE = 4096
-SDR_SAMPLE_SIZE = 8192  # This ithe default value to allow zooming the display to a 10kHz span in 320 pixels with a sample rate of 0.230 MHz.
+#SDR_SAMPLE_SIZE = 8192  # This ithe default value to allow zooming the display to a 10kHz span in 320 pixels with a sample rate of 0.230 MHz.
 #SDR_SAMPLE_SIZE = 16384				
 
+SDR_SAMPLE_SIZE = cfg['SDR_SAMPLE_SIZE']
 
-
-CLICK_DEBOUNCE  = 0.04	# Number of seconds to wait between clicks events. Set
-						# to a few hunded milliseconds to prevent accidental
-						# double clicks from hard screen presses.
+#Number of seconds to wait between touch events to keep it from flapping
+# set to a few hunded milliseconds to prevent accidental
+# double clicks from hard screen presses.
+CLICK_DEBOUNCE  = 0.04
 
 # Font size configuration.
-MAIN_FONT = 26
-NUM_FONT  = 30
+MAIN_FONT = cfg['MAIN_FONT']
+NUM_FONT  = cfg['NUM_FONT']
 
 # Color configuration (RGB tuples, 0 to 255).
 MAIN_BG        = ( 5,   45,  45) # Dark Brown
@@ -85,9 +92,9 @@ ui.Button.border_px    = 2
 if __name__ == '__main__':
 	# Initialize pygame and SDL to use the PiTFT display and touchscreen.
 	os.putenv('SDL_VIDEODRIVER', 'fbcon')
-	os.putenv('SDL_FBDEV'      , '/dev/fb1')
+	os.putenv('SDL_FBDEV'      , cfg['VIDEO_DEVICE'])
 	os.putenv('SDL_MOUSEDRV'   , 'TSLIB')
-	os.putenv('SDL_MOUSEDEV'   , '/dev/input/touchscreen')
+	os.putenv('SDL_MOUSEDEV'   , cfg['TOUCHSCREEN_DEVICE'])
 	pygame.display.init()
 	pygame.font.init()
 	pygame.mouse.set_visible(True)

@@ -1,0 +1,30 @@
+# display
+VIDEO_DEVICE: /dev/fb0
+
+# Font size configuration.
+# This is the main difference between the small and large screens
+# The rest of the UI scales around this
+MAIN_FONT: 26
+NUM_FONT: 30
+
+# device
+TOUCHSCREEN_DEVICE: /dev/input/touchscreen
+
+# rtlsdr
+
+#Default value to allow zooming the display to a 10kHz span in 320 pixels with a sample rate of 0.230 MHz.
+SDR_SAMPLE_SIZE: 8092
+
+# Min and Max for the spectrum graph. Also affects waterfall intensity.
+MIN_INTENSITY: 45
+MAX_INTENSITY: 100
+
+# If you're using this as a panadapter, if tune your radio and the signals move the wrong direction
+# Set this to false. For the IC706 and the RTLSDR, true works well for me.
+SWAP_IQ: true
+
+# The starting center frequency in mHz. For the IC706MKIIG's IF frequency, this is 69.0106
+CENTER_FREQ: 69.010600
+
+# Zoom
+ZOOM: 0.02
